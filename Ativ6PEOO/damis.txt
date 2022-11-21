@@ -1,0 +1,93 @@
+from datetime import date
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+class Date:
+    "Classe que representa datas usando dia, mês e ano"
+    "Construtor pegando os atributos de acordo com a data da máquina por padrão"
+    
+    def __init__(self, day=date.today().day, month=date.today().month, year=date.today().year):
+        """Caso os dados não  forem inseridos, os atributos são inicializados de acordo 
+        com a data da máquina. Também é criado uma data do tipo Datetime"""
+        if(day>=1 and day<=31):
+            self.__day = day
+        else:
+            print("Data incorreta")
+        if(month>=1 and month<=12):
+            self.__month = month
+        else:
+            print("Mês incorreto")
+        self.__year = year
+        
+        self.__time = datetime(self.__year, self.__month, self.__day)
+        
+        date.day
+        
+    def get_day(self):
+        return self.__day
+        
+    def get_month(self):
+        return self.__month
+        
+    def get_year(self):
+        return self.__year
+        
+    def set_day(self, day):
+        self.__day = day
+        
+    def set_month(self, month):
+        self.__month = month
+    
+    def set_year(self, year):
+        self.__year = year
+        
+        
+    def __str__(self):
+        return "{}/{}/{}".format(self.__day, self.__month, self.__year)
+        
+    def advance(self):
+        "Avança a data em um dia, atualizando o mês e o ano caso necessário"
+        
+        self.__time = self.__time + timedelta(days=1)
+        self.__day = self.__time.day
+        self.__month = self.__time.month
+        self.__year = self.__time.year
+        
+        
+        """if((self.__day + 1)>31):
+            self.__day = 1
+            if((self.__month+1)>12):
+                self.__month = 1
+                self.__year += 1
+            else:
+                self.__month += 1
+        else:
+            self.__day += 1"""
+                
+            
+    def leap_year(self):
+        "Função que calcula se um ano é bissexto. Retorna True caso sim e False caso não"
+        if(self.__year % 400 == 0):
+            return True
+        elif(self.__year % 100 == 0 and self.__year % 400 !=0):
+            return True
+        else:
+            return False
+            
+    def __add__(self, other):
+        """Soma o dia a uma data caso o valor inserido seja inteiro e soma duas datas
+        diferentes caso seja uma instancia do tipo Date"""
+        if(type(other) is int):
+            self.__time = self.__time + timedelta(days=other)
+            self.__day = self.__time.day
+            self.__month = self.__time.month
+            self.__year = self.__time.year
+        else:
+            aux = self.__time
+            aux = aux + relativedelta(years=other.get_year())
+            aux = aux + relativedelta(months=other.get_month())
+            aux = aux + timedelta(days=other.get_day())
+            return Date(aux.day, aux.month, aux.year)
+            
+            
+
+    
