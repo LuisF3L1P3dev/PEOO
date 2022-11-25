@@ -8,8 +8,6 @@ class Cliente:
         self.cpf = cpf
 
 class Conta:
-    pass
-
 #5
 
     def __init__(self, numero, cliente, saldo, limite, data_abertura):
@@ -56,7 +54,15 @@ class Conta:
         print("Numero: {}\nSaldo: {}\nNome: {}\nCPF: {}".format(self.numero, self.saldo, self.cliente.nome, self.cliente.cpf),'\n')
         #print("numero: {}\nSaldo: {}".format(self.numero, self.saldo, Cliente.nome, Cliente.cpf ))
         self.historico.transacoes.append("tirou extrato - saldo de {}".format(self.saldo))
+    #Atividade 8 - Herança e Polimorfismo - Alura
+    '''
+    1 - Adicione na classe Conta um novo método chamado atualiza() que atualiza a conta de acordo com a taxa    percentual:
+    '''
+    def atualiza(self, taxa):
+        self.saldo += self.saldo * taxa
 
+    def __str__(self):
+        return "Dados da conta:\nNumero: {}\nTitular: {} {}\nSaldo: {}\nLimite: {}\n".format(self.numero, self.cliente.nome, self.cliente.sobrenome, self.saldo, self.limite)
 #16
 
 class Data:
@@ -67,7 +73,7 @@ class Data:
         self.day = day
 
     def data_aber(self):
-        print("dia: {} ,mes: {} ,ano: {} ".format(self.day, self.month, self.year))
+        print("dia: {} mes: {} ano: {} ".format(self.day, self.month, self.year))
 
 #17
 class Historico:
@@ -83,15 +89,18 @@ class Historico:
         for i in self.transacoes:
             print("-", i)
 
-#Atividade 8 - Herança e Polimorfismo - Alura
-'''
-1 - Adicione na classe Conta um novo método chamado atualiza() que atualiza a conta de acordo com a taxa percentual:
-'''
+class ContaCorrente(Conta):
 
-def atualiza(self, taxa):
-    self.__saldo += self.__saldo * taxa
+    def atualiza(self, taxa):
+        return super().atualiza(taxa * 2) 
+    
+    def deposita(self, valor):
+        return super().deposita(valor - 0.10)
 
-        
-
+class ContaPoupanca(Conta):
+   def atualiza(self, taxa):
+        return super().atualiza(taxa * 3) 
+   
+   
 
     
