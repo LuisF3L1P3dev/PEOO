@@ -60,6 +60,7 @@ class Conta:
     '''
     def atualiza(self, taxa):
         self.saldo += self.saldo * taxa
+        return self.saldo
 
     def __str__(self):
         return "Dados da conta:\nNumero: {}\nTitular: {} {}\nSaldo: {}\nLimite: {}\n".format(self.numero, self.cliente.nome, self.cliente.sobrenome, self.saldo, self.limite)
@@ -100,7 +101,17 @@ class ContaCorrente(Conta):
 class ContaPoupanca(Conta):
    def atualiza(self, taxa):
         return super().atualiza(taxa * 3) 
-   
-   
 
-    
+'''
+Vamos criar uma classe que seja responsável por fazer a atualização de todas as contas bancárias e gerar um relatório com o saldo anterior e saldo novo de cada uma das contas. Na pasta src, crie a classe AtualizadorDeContas
+'''
+class AtualizadorDeContas():
+    def __init__(self, selic, saldo_total=0):
+        self.selic = selic
+        self.saldo_total = saldo_total
+
+    def roda(self, conta):
+        print("Saldo da Conta: {}".format(conta.saldo))
+        self.saldo_total += conta.atualiza(self.selic)
+        print("Saldo Final: {}".format(self.saldo_total))
+

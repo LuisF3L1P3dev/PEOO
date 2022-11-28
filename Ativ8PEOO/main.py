@@ -35,11 +35,17 @@ cc.atualiza(0.01)
 print(cc)
 
 print("____Conta Poupança____")
-cp = ContaPoupanca('123-6', cliente2 , 1000.0, 10000, '16/08/2021')
+cp = ContaPoupanca('123-6', cliente2 , 1000, 10000, '16/08/2021')
 #cc.extrato()
 cp.atualiza(0.01)
 #cp.extrato()
 print(cp)
 
+print("Atualizador de Contas:")
+adc = AtualizadorDeContas(0.01)
+adc.roda(cc)
+adc.roda(cp)
+
+print("Saldo total:{}".format(adc.saldo_total))
 
 
