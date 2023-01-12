@@ -3,7 +3,7 @@ Crie um programa para representa um blog. O blog contém várias postagens que
 são cadastradas por usuários auten;cados. Siga o diagrama de classes abaixo para
 a implementação:
 '''
-from datetime import datetime
+from datetime import datetime, date
 from datetime import timedelta
 
 class Usuario:
@@ -22,7 +22,9 @@ class Postagem:
         self.texto = texto
         self.dataPublicacao = dataPublicacao
         
-
+    def __str__(self):
+        return('id: {}\ntitulo: {}\ntexto: {}\ndataPublicacao: {}\n'.format(self.id, self.titulo, self.texto, self.dataPublicacao))
+        
 class Blog:
     
     def __init__(self):
@@ -41,8 +43,10 @@ class Blog:
     def listarPostagensPublicadas(self):
         postagensPublicadas = []
         for i in self.postagens:
-            if i.dataPublicacao  < datetime.now():
-                postagensPublicadas.append(postagem)
+            if i.dataPublicacao < datetime.now():
+                postagensPublicadas.append(i)
+            else:
+                print('data errada')
             return postagensPublicadas
     
     def listarTodasAsPostagens(self):
@@ -55,23 +59,59 @@ class Blog:
 
 if __name__ == "__main__":
     user1 = Usuario(1, 'luis', 'luis', '1234')
-    post1 = Postagem(1, 'economia', 'oioiioi', '14/05/2022')
-    #post2 = Postagem(2, 'saúde', 'caracois', datetime.now())
-    post3 = Postagem(3, 'educação', 'abelhas', '31/12/2022')
-    blog1 = Blog()
+    post1 = Postagem(1, 'economia', 'oioiioi', date(2022, 5, 20))
+    post2 = Postagem(2, 'saúde', 'caracois', datetime.now())
+    post3 = Postagem(3, 'educação', 'abelhas', date(2022, 12, 31))
+    blog = Blog()
 
     #add postagem
-    blog1.adcionarPostagem(post1)
-    blog1.adcionarPostagem(post3)
+    print('_____Postagens:_____ ')
+    blog.adcionarPostagem(post1)
+    blog.adcionarPostagem(post2)
+    blog.adcionarPostagem(post3)
+
+    print(post1.__str__())
+    print(post2.__str__())
+    print(post3.__str__())
 
     #publicar postagem
-    print(blog1.publicarPostagem(post1))
+    print('_____Publicar postagens:_____ ')
+    print(blog.publicarPostagem(post1))
+    print(blog.publicarPostagem(post2))
+    print(blog.publicarPostagem(post3))
 
     #listar Postagens Publicadas
-    blog1.listarPostagensPublicadas()
-
+    print('_____Listar Postagens Publicadas:_____ ')
+    for p in blog.listarPostagensPublicadas():
+        print('x')
+        print(p)
+    
     #listar Todas As Postagens
-    blog1.listarTodasAsPostagens()
-
+    print('-------listar Todas As Postagens:------')  
+    for p in blog.listarTodasAsPostagens():
+        print(p)
     #Apagar todas as postagens
-    blog1.apagarPostagens(post1)
+    blog.apagarPostagens(post1)
+
+    listUsers = [] #lista de usuarios autenticados
+    verificacao = None
+
+    while verificacao != 0:
+        verificacao = int(input('1-Criar usuario\n2-Usuario Cadastrado\n0-sair'))
+        if verificacao == 1:
+         
+            id = input('id: ')
+            nome = str(input('nome: '))
+            login = str(input('login: '))
+            senha =  str(input('senha: '))
+
+        user = Usuario(id, nome, login, senha)
+        listUsers.append(user)
+
+        if verificacao == 2:
+            verificacao = int(input('3-Adiconar Postagem:\n4-Publicar Postagens:\n5-Listar Postagens Publicadas:\n6-Listar Todas as Postagens\n7-Apagar Postagens'))
+            
+
+            
+
+
