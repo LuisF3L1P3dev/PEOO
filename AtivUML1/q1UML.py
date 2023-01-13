@@ -58,12 +58,12 @@ class Blog:
         for i in self.postagens:
             if i.id == postagem.id:
                 self.postagens.remove(postagem)
-
+    '''
     def loginUsers(self):
         login = str(input('login: '))
         senha = str(input('senha: ')) 
         if login == self.login() and senha == self.senha():
-        
+     '''   
 
 
 if __name__ == "__main__":
@@ -121,22 +121,36 @@ if __name__ == "__main__":
 
         if verificacao == 2:
             print('Usuarios:')
-            for i in listUsers:
-                print(' ',i.id,'-',i.nome,'\n')
-
             login = str(input('login: '))
             senha = str(input('senha: '))
 
-            if login == self.login() and senha == self.senha():
+            for i in listUsers:
+                print(' ',i.id,'-',i.nome,'\n')
 
+                if login == i.login and senha == i.senha:          
+
+                    verificacao = int(input('3-Adiconar Postagem:\n4-Publicar Postagens:\n5-Listar Postagens Publicadas:\n6-Listar Todas as Postagens\n7-Apagar Postagens\n8-voltar\n'))
+
+                    if verificacao == 3:
+                        pass
+
+                    if verificacao == 4:
+                        pass
+
+                    if verificacao == 5:
+                        pass
+
+                    if verificacao == 6:
+                        pass
+
+                    if verificacao == 7:
+                        pass
+
+                    if verificacao == 8:
+                        pass
                 
-            verificacao = int(input('3-Adiconar Postagem:\n4-Publicar Postagens:\n5-Listar Postagens Publicadas:\n6-Listar Todas as Postagens\n7-Apagar Postagens\n8-voltar\n'))
-
-            if verificacao == 3:
-                
-
-                
-
+                else:
+                    print('senha e login incorretos tente novamente')
 
             
 
