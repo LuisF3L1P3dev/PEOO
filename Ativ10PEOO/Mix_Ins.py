@@ -123,6 +123,7 @@ class SeguroDeVida(TributavelMixIn):
 
     def get_valor_imposto(self):
         return 50 + self._valor * 0.05
+
 '''
 Vamos criar uma classe que seja responsável por fazer a atualização de todas as contas bancárias e gerar um relatório com o saldo anterior e saldo novo de cada uma das contas. Na pasta src, crie a classe AtualizadorDeContas
 '''
